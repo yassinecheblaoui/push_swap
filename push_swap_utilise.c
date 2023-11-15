@@ -6,7 +6,7 @@
 /*   By: yachebla <yachebla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 17:46:18 by yachebla          #+#    #+#             */
-/*   Updated: 2023/06/24 17:46:19 by yachebla         ###   ########.fr       */
+/*   Updated: 2023/11/15 20:43:03 by yachebla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,8 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
-	while (s[i] != '\0')
-	{
+	while (s[i])
 		i++;
-	}
 	return (i);
 } 
 
@@ -151,7 +149,7 @@ char	**ft_split(char const *s, char c)
 	j = 0;
 	if (!tab)
 		return (NULL);
-	while (s[i] != '\0' && j < ft_count_words(s, c))
+	while (s[i] && j < ft_count_words(s, c))
 	{
 		while (s[i] == c)
 			i++;
@@ -165,4 +163,45 @@ char	**ft_split(char const *s, char c)
 	}
 	tab[j] = NULL;
 	return (tab);
+}
+int	check_double(char **result)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (result[i])
+	{
+		j = i + 1;
+		while (result[j])
+		{
+			if (ft_atoi(result[i]) == ft_atoi(result[j]))
+				ft_protect(2);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+void	check_sign(char **result)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while(result[j])
+	{
+		if (result[j][i] == '-' || result[j][i] == '+')
+			i++;
+		while (result[j][i])
+		{
+			if (result[j][i] == '-'|| result[j][i] == '+')
+				ft_protect(1);
+			i++;
+		}
+		j++;
+	}
+
 }

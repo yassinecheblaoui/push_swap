@@ -6,15 +6,20 @@
 /*   By: yachebla <yachebla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 17:46:21 by yachebla          #+#    #+#             */
-/*   Updated: 2023/06/24 17:54:57 by yachebla         ###   ########.fr       */
+/*   Updated: 2023/11/15 20:33:28 by yachebla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "push_swap.h"
 
-int	main()
+int	main(int	ac, char **av)
 {
-	t_swap data;
-
-	parssing(&data);
+	t_stack data;
+	int i=0;
+	while (av[i])
+	{
+		puts(av[i++]);
+	}
+	
+	// parssing(&data);
 }
