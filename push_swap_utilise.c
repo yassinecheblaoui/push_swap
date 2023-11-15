@@ -6,12 +6,11 @@
 /*   By: yachebla <yachebla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 17:46:18 by yachebla          #+#    #+#             */
-/*   Updated: 2023/11/15 20:43:03 by yachebla         ###   ########.fr       */
+/*   Updated: 2023/11/15 22:21:51 by yachebla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "push_swap.h"
-
 
 int	ft_atoi(const char *str)
 {
@@ -189,10 +188,10 @@ void	check_sign(char **result)
 	int i;
 	int j;
 
-	i = 0;
 	j = 0;
 	while(result[j])
 	{
+		i = 0;
 		if (result[j][i] == '-' || result[j][i] == '+')
 			i++;
 		while (result[j][i])
@@ -203,5 +202,4 @@ void	check_sign(char **result)
 		}
 		j++;
 	}
-
 }

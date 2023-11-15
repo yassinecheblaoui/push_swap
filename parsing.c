@@ -6,17 +6,17 @@
 /*   By: yachebla <yachebla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 17:46:14 by yachebla          #+#    #+#             */
-/*   Updated: 2023/11/15 20:45:30 by yachebla         ###   ########.fr       */
+/*   Updated: 2023/11/15 22:03:57 by yachebla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 int is_alldigit(char **result) {
-  int i = 0;
   int j = 0;
   while (result[j])
   {
+      int i = 0;
       while(result[j][i])
       {
         if ((result[j][i] < '0' || result[j][i] > '9') && result[j][i] != '-' &&  result[j][i] != '+')
@@ -53,7 +53,6 @@ int parce_args(char **av)
 
   i = 1; 
   size = 0;
-  // check_signal(av);
   while (av[i])
   {
     splited = ft_split(av[i],' ');
