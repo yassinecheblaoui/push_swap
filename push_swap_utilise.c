@@ -6,13 +6,13 @@
 /*   By: yachebla <yachebla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 17:46:18 by yachebla          #+#    #+#             */
-/*   Updated: 2023/11/15 22:21:51 by yachebla         ###   ########.fr       */
+/*   Updated: 2023/11/16 15:28:20 by yachebla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "push_swap.h"
 
-int	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
 	int			i;
 	int			j;
@@ -34,7 +34,10 @@ int	ft_atoi(const char *str)
 		nb = (nb * 10) + (str[i] - '0');
 		i++;
 	}
-	return (nb * j);
+	long result = nb * j;
+	if (result > INT_MAX || result < INT_MIN)
+		ft_protect(1);
+	return result;
 }
 
 char	*ft_strdup(const char *s1)
@@ -201,5 +204,28 @@ void	check_sign(char **result)
 			i++;
 		}
 		j++;
+	}
+}
+
+void check_int(char **str)
+{
+	int i;
+	int j;
+	long int nb;
+
+	i = 0;
+	while (str[i])
+	{
+		j = 0;
+		nb = ft_atoi(str[i]);
+		while (str[i][j])
+		{
+			if (str[i][j] == '-' || str[i][j] == '+')
+				j++;
+			if (str[i][j] < '0' || str[i][j] > '9')
+				ft_protect(1);
+			j++;
+		}
+		i++;
 	}
 }

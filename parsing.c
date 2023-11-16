@@ -6,7 +6,7 @@
 /*   By: yachebla <yachebla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 17:46:14 by yachebla          #+#    #+#             */
-/*   Updated: 2023/11/15 22:03:57 by yachebla         ###   ########.fr       */
+/*   Updated: 2023/11/16 20:59:14 by yachebla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,22 @@ int parce_args(char **av)
   {
     splited = ft_split(av[i],' ');
     j = 0;
-    while(splited[j]) 
-    {
+    while(splited[j])
       j++;
-    }
     size += j;
     ft_free(splited,NULL,j);
     i++;
   }
   result = (char **)malloc(sizeof(char *) * size + 1);
+  if (!result)
+    ft_protect(1);
   i = 1;
   j = 0;
   while (av[i])
   {
     size = 0;
     splited = ft_split(av[i],' ');
-    while(splited[size]) 
+    while(splited[size])
     {
       result[j] = ft_strdup(splited[size]);
       printf("%s ===\n",result[j]);
@@ -87,7 +87,12 @@ int parce_args(char **av)
   is_alldigit(result);
   check_double(result);
   check_sign(result);
-  
+  check_int(result);
+  // ft_free(result,NULL,j);
+  // while (1)
+  // {
+    
+  // }
   return 0;
 }
 void	ft_protect(int x)
@@ -102,11 +107,3 @@ void	ft_protect(int x)
   exit(1);
 }
 
-int main(int ac, char **av) 
-{
-  t_stack a;
-  t_stack b;
-  if (ac < 2) 
-    ft_protect(1);
-  parce_args(av);
-}
