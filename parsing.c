@@ -6,7 +6,7 @@
 /*   By: yachebla <yachebla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 17:46:14 by yachebla          #+#    #+#             */
-/*   Updated: 2023/11/17 13:20:15 by yachebla         ###   ########.fr       */
+/*   Updated: 2023/11/17 19:39:33 by yachebla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int is_alldigit(char **result) {
   return 0;
 }
 
-void ft_free(char **arr,char *str,size_t j)
+void ft_free(char **arr,char *str,int j)
 {
   int i;
   

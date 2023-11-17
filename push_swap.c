@@ -117,7 +117,7 @@ void bring_index(t_data *data, t_info *info)
 int main(int ac, char **av) 
 {
   t_stack a;
-  t_stack b;
+//   t_stack b;
 
 //   a = NULL;
 //   a = malloc(sizeof(t_stack));
