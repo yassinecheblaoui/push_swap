@@ -6,7 +6,7 @@
 /*   By: yachebla <yachebla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 17:46:14 by yachebla          #+#    #+#             */
-/*   Updated: 2023/11/16 20:59:14 by yachebla         ###   ########.fr       */
+/*   Updated: 2023/11/17 13:20:15 by yachebla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,31 @@ void ft_free(char **arr,char *str,size_t j)
   }
 }
 
-int parce_args(char **av) 
+void init_stack(t_stack *a, char **result , int len)
+{
+	int		i;
+	int		j;
+	int		value;
+	t_stack	*new_node;
+	
+	i = 0;
+	j = len - 1;
+	while (i < len )
+	{
+		value = ft_atoi(result[j]);
+		printf("%d--\n",value);
+		new_node = malloc(sizeof(t_stack));
+		if (!new_node)
+		  ft_protect(1);
+		new_node->value = value;
+		new_node->next = a;
+		a = new_node;
+		i++;
+		j--;
+	}
+	print_stack(a);
+}
+int parce_args(char **av, t_stack *a) 
 {
   int i;
   int j;
@@ -88,6 +112,9 @@ int parce_args(char **av)
   check_double(result);
   check_sign(result);
   check_int(result);
+  a = NULL;
+  init_stack(a,result, j);
+//   print_stack(a);
   // ft_free(result,NULL,j);
   // while (1)
   // {
@@ -103,7 +130,6 @@ void	ft_protect(int x)
 		write(2,"Error double arg\n", ft_strlen("Error double arg\n"));
 	if (x == 3)
 		write(2,"Error arg not digit\n", ft_strlen("Error arg not digit\n"));
-    
-  exit(1);
+	exit(1);
 }
 

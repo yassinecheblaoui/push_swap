@@ -6,7 +6,7 @@
 /*   By: yachebla <yachebla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 17:46:18 by yachebla          #+#    #+#             */
-/*   Updated: 2023/11/16 15:28:20 by yachebla         ###   ########.fr       */
+/*   Updated: 2023/11/17 13:21:48 by yachebla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ char	**ft_split(char const *s, char c)
 	tab[j] = NULL;
 	return (tab);
 }
-int	check_double(char **result)
+void	check_double(char **result)
 {
 	int i;
 	int j;
@@ -183,7 +183,6 @@ int	check_double(char **result)
 		}
 		i++;
 	}
-	return (0);
 }
 
 void	check_sign(char **result)

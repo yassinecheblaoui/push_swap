@@ -1,57 +1,105 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yachebla <yachebla@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/24 17:46:21 by yachebla          #+#    #+#             */
-/*   Updated: 2023/11/16 20:55:36 by yachebla         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "push_swap.h"
 
-# include "push_swap.h"
-
-void push_stack(int *stack, int value)
+void push_stack(t_stack **stack, int value)
 {
-	int i;
+	t_stack *new_node;
 
-	i = 0;
-	while (stack[i])
-		i++;
-	stack[i] = value;
+	new_node = malloc(sizeof(t_stack));
+	if (!new_node)
+		ft_protect(1);
+	new_node->value = value;
+	new_node->next = *stack;
+	*stack = new_node;
 }
 
-void print_stack(int *stack)
+void print_stack(t_stack *stack)
+{
+	while (stack)
+	{
+		printf("%d\n", stack->value);
+		stack = stack->next;
+	}
+}
+
+void swap_stack(t_stack **stack)
+{
+	int tmp;
+
+	if (*stack && (*stack)->next)
+	{
+		tmp = (*stack)->value;
+		(*stack)->value = (*stack)->next->value;
+		(*stack)->next->value = tmp;
+	}
+}
+
+void bring_index(t_data *data, t_info *info)
 {
 	int i;
+	int j;
 
 	i = 0;
-	while (stack[i])
+	while (i < data->size_a)
 	{
-		printf("%d\n", stack[i]);
+		j = 0;
+		while (j < info->len)
+		{
+			if (data->a[i] == info->array[j])
+			{
+				data->a[i] = j;
+				break ;
+			}
+			j++;
+		}
 		i++;
 	}
 }
 
-void	pop_stack(int *stack)
-{
-	int i;
+// void rotate_stack(t_stack **stack)
+// {
+// 	t_stack *tmp;
+// 	t_stack *tmp2;
 
-	i = 0;
-	while (stack[i])
-		i++;
-	stack[i - 1] = 0;
-}
+// 	if (*stack && (*stack)->next)
+// 	{
+// 		tmp = *stack;
+// 		tmp2 = *stack;
+// 		while (tmp->next)
+// 			tmp = tmp->next;
+// 		*stack = (*stack)->next;
+// 		tmp->next = tmp2;
+// 		tmp2->next = NULL;
+// 	}
+// void print_stack(int *stack)
+// {
+// 	int i;
 
-void	swap_stack(int *stack)
-{
-	int tmp;
+// 	i = 0;
+// 	while (stack[i])
+// 	{
+// 		printf("%d\n", stack[i]);
+// 		i++;
+// 	}
+// }
 
-	tmp = stack[0];
-	stack[0] = stack[1];
-	stack[1] = tmp;
-}
+// // void	pop_stack(int *stack)
+// // {
+// // 	int i;
+
+// // 	i = 0;
+// // 	while (stack[i])
+// // 		i++;
+// // 	stack[i - 1] = 0;
+// // }
+
+// void	swap_stack(int *stack)
+// {
+// 	int tmp;
+
+// 	tmp = stack[0];
+// 	stack[0] = stack[1];
+// 	stack[1] = tmp;
+// }
 
 
 
@@ -70,7 +118,14 @@ int main(int ac, char **av)
 {
   t_stack a;
   t_stack b;
+
+//   a = NULL;
+//   a = malloc(sizeof(t_stack));
+//   a->value = 1;
+//   a->next = NULL;
+//   push_stack(&a, 2);
   if (ac < 2) 
     ft_protect(1);
-  parce_args(av);
+  parce_args(av, &a);
+
 }
