@@ -9,7 +9,6 @@ void push_stack(t_stack **stack, int value)
 		ft_protect(1);
 	new_node->value = value;
 	new_node->next = *stack;
-	*stack = new_node;
 }
 
 void print_stack(t_stack *stack)
@@ -53,6 +52,84 @@ void bring_index(t_data *data, t_info *info)
 		}
 		i++;
 	}
+}
+
+void init_info(t_info *info, int len)
+{
+	info->array = malloc(sizeof(int) * len);
+	if (!info->array)
+		ft_protect(1);
+	info->len = len;
+	info->index = 0;
+}
+ 
+void init_data(t_data *data, int len)
+{
+	data->a = malloc(sizeof(int) * len);
+	if (!data->a)
+		ft_protect(1);
+	data->b = malloc(sizeof(int) * len);
+	if (!data->b)
+		ft_protect(1);
+	data->size_a = len;
+	data->size_b = 0;
+}
+
+void data_to_stack(t_data *data, t_stack **stack)
+{
+	int i;
+
+	i = 0;
+	while (i < data->size_a)
+	{
+		push_stack(stack, data->a[i]);
+		i++;
+	}
+}
+
+void exit_free(t_data *data, t_info *info)
+{
+	free(data->a);
+	free(data->b);
+	free(info->array);
+}
+
+void sort(t_data *data, t_info *info)
+{
+	int i;
+	int j;
+	int tmp;
+
+	i = 0;
+	while (i < info->len)
+	{
+		j = i + 1;
+		while (j < info->len)
+		{
+			if (info->array[i] > info->array[j])
+			{
+				tmp = info->array[i];
+				info->array[i] = info->array[j];
+				info->array[j] = tmp;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+int check_sort(t_data *data)
+{
+	int i;
+
+	i = 0;
+	while (i < data->size_a - 1)
+	{
+		if (data->a[i] > data->a[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 // void rotate_stack(t_stack **stack)
