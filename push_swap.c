@@ -94,29 +94,29 @@ void exit_free(t_data *data, t_info *info)
 	free(info->array);
 }
 
-void sort(t_data *data, t_info *info)
-{
-	int i;
-	int j;
-	int tmp;
+// void sort(t_data *data, t_info *info)
+// {
+// 	int i;
+// 	int j;
+// 	int tmp;
 
-	i = 0;
-	while (i < info->len)
-	{
-		j = i + 1;
-		while (j < info->len)
-		{
-			if (info->array[i] > info->array[j])
-			{
-				tmp = info->array[i];
-				info->array[i] = info->array[j];
-				info->array[j] = tmp;
-			}
-			j++;
-		}
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (i < info->len)
+// 	{
+// 		j = i + 1;
+// 		while (j < info->len)
+// 		{
+// 			if (info->array[i] > info->array[j])
+// 			{
+// 				tmp = info->array[i];
+// 				info->array[i] = info->array[j];
+// 				info->array[j] = tmp;
+// 			}
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
 
 int check_sort(t_data *data)
 {
