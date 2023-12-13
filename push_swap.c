@@ -5,216 +5,114 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yachebla <yachebla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/18 23:58:24 by yachebla          #+#    #+#             */
-/*   Updated: 2023/11/18 23:58:26 by yachebla         ###   ########.fr       */
+/*   Created: 2023/06/24 17:46:21 by yachebla          #+#    #+#             */
+/*   Updated: 2023/06/24 17:54:57 by yachebla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+# include "push_swap.h"
 
-void push_stack(t_stack **stack, int value)
-{
-	t_stack *new_node;
-
-	new_node = malloc(sizeof(t_stack));
-	if (!new_node)
-		ft_protect(1);
-	new_node->value = value;
-	new_node->next = *stack;
-}
-
-void print_stack(t_stack *stack)
-{
-	while (stack)
-	{
-		printf("%d\n", stack->value);
-		stack = stack->next;
-	}
-}
-
-void swap_stack(t_stack **stack)
-{
-	int tmp;
-
-	if (*stack && (*stack)->next)
-	{
-		tmp = (*stack)->value;
-		(*stack)->value = (*stack)->next->value;
-		(*stack)->next->value = tmp;
-	}
-}
-
-void bring_index(t_data *data, t_info *info)
+void push_swap(t_swap *data)
 {
 	int i;
 	int j;
-
-	i = 0;
-	while (i < data->size_a)
+	while (data->a)
 	{
+		i = 0;
 		j = 0;
-		while (j < info->len)
-		{
-			if (data->a[i] == info->array[j])
-			{
-				data->a[i] = j;
-				break ;
-			}
+		while (data->a[i] < data->a[i + 1])
+			i++;
+		while (data->a[j] > data->a[j + 1])
 			j++;
+		if (i < j)
+		{
+			while (i > 0)
+			{
+				ra(data);
+				i--;
+			}
 		}
-		i++;
+		else
+		{
+			while (j > 0)
+			{
+				rra(data);
+				j--;
+			}
+		}
+		pb(data);
 	}
+	// while (data->b)
+	// 	pa(data);
 }
-
-void init_info(t_info *info, int len)
-{
-	info->array = malloc(sizeof(int) * len);
-	if (!info->array)
-		ft_protect(1);
-	info->len = len;
-	info->index = 0;
-}
- 
-void init_data(t_data *data, int len)
-{
-	data->a = malloc(sizeof(int) * len);
-	if (!data->a)
-		ft_protect(1);
-	data->b = malloc(sizeof(int) * len);
-	if (!data->b)
-		ft_protect(1);
-	data->size_a = len;
-	data->size_b = 0;
-}
-
-void data_to_stack(t_data *data, t_stack **stack)
+void pb(t_swap *data)
 {
 	int i;
+	int j;
+	int tmp;
 
 	i = 0;
-	while (i < data->size_a)
-	{
-		push_stack(stack, data->a[i]);
+	j = 0;
+	tmp = data->a[0];
+	while (data->a[i])
 		i++;
+	while (j < i)
+	{
+		data->a[j] = data->a[j + 1];
+		j++;
 	}
+	data->a[j] = tmp;
+	i = 0;
+	j = 0;
+	while (data->b[i])
+		i++;
+	while (j < i)
+	{
+		data->b[j] = data->b[j + 1];
+		j++;
+	}
+	data->b[j] = tmp;
 }
-
-void exit_free(t_data *data, t_info *info)
-{
-	free(data->a);
-	free(data->b);
-	free(info->array);
-}
-
-// void sort(t_data *data, t_info *info)
-// {
-// 	int i;
-// 	int j;
-// 	int tmp;
-
-// 	i = 0;
-// 	while (i < info->len)
-// 	{
-// 		j = i + 1;
-// 		while (j < info->len)
-// 		{
-// 			if (info->array[i] > info->array[j])
-// 			{
-// 				tmp = info->array[i];
-// 				info->array[i] = info->array[j];
-// 				info->array[j] = tmp;
-// 			}
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
-
-int check_sort(t_data *data)
+void rra(t_swap *data)
 {
 	int i;
+	int j;
+	int tmp;
 
 	i = 0;
-	while (i < data->size_a - 1)
-	{
-		if (data->a[i] > data->a[i + 1])
-			return (0);
+	j = 0;
+	tmp = data->a[0];
+	while (data->a[i])
 		i++;
+	while (j < i)
+	{
+		data->a[j] = data->a[j + 1];
+		j++;
 	}
-	return (1);
+	data->a[j] = tmp;
 }
+void ra(t_swap *data)
+{
+	int i;
+	int j;
+	int tmp;
 
-// void rotate_stack(t_stack **stack)
-// {
-// 	t_stack *tmp;
-// 	t_stack *tmp2;
-
-// 	if (*stack && (*stack)->next)
-// 	{
-// 		tmp = *stack;
-// 		tmp2 = *stack;
-// 		while (tmp->next)
-// 			tmp = tmp->next;
-// 		*stack = (*stack)->next;
-// 		tmp->next = tmp2;
-// 		tmp2->next = NULL;
-// 	}
-// void print_stack(int *stack)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while (stack[i])
-// 	{
-// 		printf("%d\n", stack[i]);
-// 		i++;
-// 	}
-// }
-
-// // void	pop_stack(int *stack)
-// // {
-// // 	int i;
-
-// // 	i = 0;
-// // 	while (stack[i])
-// // 		i++;
-// // 	stack[i - 1] = 0;
-// // }
-
-// void	swap_stack(int *stack)
-// {
-// 	int tmp;
-
-// 	tmp = stack[0];
-// 	stack[0] = stack[1];
-// 	stack[1] = tmp;
-// }
-
-
-
-// int	main(int	ac, char **av)
-// {
-// 	t_stack data;
-// 	int i=0;
-// 	while (av[i])
-// 	{
-// 		puts(av[i++]);
-// 	}
+	i = 0;
+	j = 0;
+	tmp = data->a[0];
+	while (data->a[i])
+		i++;
+	while (j < i)
+	{
+		data->a[j] = data->a[j + 1];
+		j++;
+	}
+	data->a[j] = tmp;
+}
 	
-// 	// parssing(&data);
-// }
-int main(int ac, char **av) 
+int	main()
 {
-  t_stack a;
-//   t_stack b;
+	t_swap data;
 
-//   a = NULL;
-//   a = malloc(sizeof(t_stack));
-//   a->value = 1;
-//   a->next = NULL;
-//   push_stack(&a, 2);
-  if (ac < 2) 
-    ft_protect(1);
-  parce_args(av, &a);
-
+	parssing(&data);
 }

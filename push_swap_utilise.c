@@ -6,13 +6,14 @@
 /*   By: yachebla <yachebla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 17:46:18 by yachebla          #+#    #+#             */
-/*   Updated: 2023/11/17 13:21:48 by yachebla         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:46:19 by yachebla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "push_swap.h"
 
-long	ft_atoi(const char *str)
+
+int	ft_atoi(const char *str)
 {
 	int			i;
 	int			j;
@@ -34,10 +35,7 @@ long	ft_atoi(const char *str)
 		nb = (nb * 10) + (str[i] - '0');
 		i++;
 	}
-	long result = nb * j;
-	if (result > INT_MAX || result < INT_MIN)
-		ft_protect(1);
-	return result;
+	return (nb * j);
 }
 
 char	*ft_strdup(const char *s1)
@@ -63,8 +61,10 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
-	while (s[i])
+	while (s[i] != '\0')
+	{
 		i++;
+	}
 	return (i);
 } 
 
@@ -151,7 +151,7 @@ char	**ft_split(char const *s, char c)
 	j = 0;
 	if (!tab)
 		return (NULL);
-	while (s[i] && j < ft_count_words(s, c))
+	while (s[i] != '\0' && j < ft_count_words(s, c))
 	{
 		while (s[i] == c)
 			i++;
@@ -165,66 +165,4 @@ char	**ft_split(char const *s, char c)
 	}
 	tab[j] = NULL;
 	return (tab);
-}
-void	check_double(char **result)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (result[i])
-	{
-		j = i + 1;
-		while (result[j])
-		{
-			if (ft_atoi(result[i]) == ft_atoi(result[j]))
-				ft_protect(2);
-			j++;
-		}
-		i++;
-	}
-}
-
-void	check_sign(char **result)
-{
-	int i;
-	int j;
-
-	j = 0;
-	while(result[j])
-	{
-		i = 0;
-		if (result[j][i] == '-' || result[j][i] == '+')
-			i++;
-		while (result[j][i])
-		{
-			if (result[j][i] == '-'|| result[j][i] == '+')
-				ft_protect(1);
-			i++;
-		}
-		j++;
-	}
-}
-
-void check_int(char **str)
-{
-	int i;
-	int j;
-	long int nb;
-
-	i = 0;
-	while (str[i])
-	{
-		j = 0;
-		nb = ft_atoi(str[i]);
-		while (str[i][j])
-		{
-			if (str[i][j] == '-' || str[i][j] == '+')
-				j++;
-			if (str[i][j] < '0' || str[i][j] > '9')
-				ft_protect(1);
-			j++;
-		}
-		i++;
-	}
 }
